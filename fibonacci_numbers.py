@@ -7,7 +7,7 @@ def generate_fib_nums(nums):
         print([1])
     else:
         nums = [1, 1]
-        for x in range(2, numbers_to_generate):
+        for _ in range(2, numbers_to_generate):
             new_num = nums[-1] + nums[-2]
             nums += [new_num]
         print(nums)
