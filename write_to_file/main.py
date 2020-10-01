@@ -17,7 +17,5 @@ if __name__ == "__main__":
     for section in article_body:
         article_text += section.get_text()
 
-    print(article_text)
-
     with open(f"{file_name}.txt", 'w') as open_file:
         open_file.write(article_text)
