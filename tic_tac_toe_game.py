@@ -2,6 +2,7 @@ if __name__ == "__main__":
     
     playing = True
     player = 1
+    score = [0, 0, 0]
     board = [[0, 0 ,0], [0, 0, 0], [0, 0, 0]]
 
     vertical_line = """|   """
@@ -65,22 +66,34 @@ if __name__ == "__main__":
             match = board[0][0]
             if match != 0:
                 print(f"\nPlayer {match} wins!")
+                score[match - 1] += 1
                 playing = False
         if board[2][0] == board [1][1] == board[0][2]:
             match = board[2][0]
             if match != 0:
                 print(f"\nPlayer {match} wins!")
+                score[match - 1] += 1
                 playing = False
         for i in range(3):
             if board[i][0] == board[i][1] == board[i][2]:
                 match = board[i][0]
                 if match != 0:
                     print(f"\nPlayer {match} wins!")
+                    score[match - 1] += 1
                     playing = False
             if board[0][i] == board[1][i] == board[2][i]:
                 match = board[0][i]
                 if match != 0:
                     print(f"\nPlayer {match} wins!")
+                    score[match - 1] += 1
+                    playing = False
+        full = 0
+        for row in board:
+            if 0 not in row:
+                full += 1
+                if full == 3:     
+                    print(f"\nIt's a cat's game!")
+                    score[2] += 1
                     playing = False
 
     def update_board(row_int, column_int):
@@ -102,16 +115,41 @@ if __name__ == "__main__":
             print_vertical()
         print_horizontal()
 
+    def play_again():
+        global playing
+        try:
+            again = input(f"\nPlay again? (y/n)   ")
+        except TypeError: 
+            print('Invalid input. Please enter y or n.')
+            play_again()
+        if 'y' in again.lower():
+            playing = True
+            init()
+        elif 'n' in again.lower():
+            print('\nGood game!')
+            return
+        else:
+            print('Invalid input. Please enter y or n.')
+            play_again()
+    
+    def clear_board():
+        for row in board:
+            for i in range(3):
+                row[i] = 0
+
     def init():
-
+        clear_board()
         print_board()
-
         while playing == True:
             response = ask_user()
             row = response[0]
             column = response[1]
             update_board(row, column)
-            
-
-
+        print(f"""
+        The score is:
+        Player 1: {score[0]}
+        Player 2: {score[1]}
+        Cat's game: {score[2]}""")
+        play_again()
+        
     init()
