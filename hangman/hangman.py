@@ -24,7 +24,7 @@ def init():
 
     list = ['_' for char in chosen_word]
 
-    guessed = []
+    guessed = set()
 
     print()
     print(*list)
@@ -36,6 +36,8 @@ def init():
         print('\nTry to guess the word!')
         user_guess = input('Enter a letter to guess:   ').upper().strip()
 
+        print(f"-----------------------------")
+
         if len(user_guess) > 1:
             print('\nPlease enter only one letter as a guess.')
 
@@ -43,7 +45,7 @@ def init():
             print('\nYou already guessed that one. Try a different letter.')
 
         else:
-            guessed.append(user_guess)
+            guessed.add(user_guess)
             for i in range(len(chosen_word)):
                 if chosen_word[i] == user_guess:
                     list[i] = user_guess

@@ -1,5 +1,6 @@
 import os
 
-with open('sowpods.txt') as f:
-    words = list(f)
-    
+# print(os.path.exists('hangman/sowpods.txt'))
+
+with open('hangman/sowpods.txt') as f:
+    words = tuple(f)
